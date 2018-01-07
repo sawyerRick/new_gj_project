@@ -1,9 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import pymongo
-from checkout_404 import check_404
 from add_http import add_http
-from repeat_checkout import repeat_checkout
+from ganji_or_zhzh import judge
 
 #激活mongo客户端
 client = pymongo.MongoClient()
@@ -18,18 +17,32 @@ def get_links_from(channel, page):
     try:
         wb_data = requests.get(list_view, timeout=5)
         soup = BeautifulSoup(wb_data.text, 'lxml')
-        urls = soup.select("td.t > a")
-        for link in urls:
-            link = link.get('href')
-            link = add_http(link)
-            # if repeat_checkout(link) or check_404(link):
-            #     print('error_page')
-            #     return
-            # else:
-            print(link.split('?')[0])
-            links_lib.insert_one({'url': link.split('?')[0]})
+        if judge(list_view) == 1:#判断是什么类型的网页
+            urls = soup.select("td.t > a")
+            for link in urls:
+                link = link.get('href')  # 提取链接
+                link = add_http(link)  # 修复链接格式
+                if wb_data.status_code == 404:  # 404检查
+                    print('404page')
+                    return
+                else:
+                    print(link.split('?')[0])
+                    links_lib.insert_one({'url': link.split('?')[0]})
+        elif judge(list_view) == 0:
+            urls = soup.select("dt > a > img")
+            for link in urls:
+                link = link.get('src')  # 提取链接
+                link = add_http(link)  # 修复链接格式
+                if wb_data.status_code == 404:  # 404检查
+                    print('404page')
+                    return
+                else:
+                    print(link.split('?')[0])
+                    links_lib.insert_one({'url': link.split('?')[0]})
+        else:
+            return
     except:
         pass
     
-
-#get_links_from("http://cq.ganji.com/rirongbaihuo/", 1)
+if __name__ == '__main__':
+    get_links_from("http://bj.ganji.com/ershoubijibendiannao/", 1)

@@ -8,29 +8,29 @@ def get_type_urls():
     soup = BeautifulSoup(wb_data.text, 'lxml')
     type_urls = soup.select("dl.fenlei > dt > a")
     for link in type_urls:
-        url = "http://cq.ganji.com" + str(link.get('href'))
+        url = "http://bj.ganji.com" + str(link.get('href'))
         print(url)
         
 #get_type_urls()
 
 urls = """
-    http://cq.ganji.com/jiaju/
-    http://cq.ganji.com/rirongbaihuo/
-    http://cq.ganji.com/shouji/
-    http://cq.ganji.com/bangong/
-    http://cq.ganji.com/nongyongpin/
-    http://cq.ganji.com/jiadian/
-    http://cq.ganji.com/ershoubijibendiannao/
-    http://cq.ganji.com/ruanjiantushu/
-    http://cq.ganji.com/yingyouyunfu/
-    http://cq.ganji.com/diannao/
-    http://cq.ganji.com/xianzhilipin/
-    http://cq.ganji.com/fushixiaobaxuemao/
-    http://cq.ganji.com/meironghuazhuang/
-    http://cq.ganji.com/shuma/
-    http://cq.ganji.com/laonianyongpin/
-    http://cq.ganji.com/xuniwupin/
-    http://cq.ganji.com/qitawupin/
-    http://cq.ganji.com/ershoufree/
-    http://cq.ganji.com/wupinjiaohuan/
+    http://bj.ganji.com/jiaju/
+    http://bj.ganji.com/rirongbaihuo/
+    http://bj.ganji.com/shouji/
+    http://bj.ganji.com/bangong/
+    http://bj.ganji.com/nongyongpin/
+    http://bj.ganji.com/jiadian/
+    http://bj.ganji.com/ershoubijibendiannao/
+    http://bj.ganji.com/ruanjiantushu/
+    http://bj.ganji.com/yingyouyunfu/
+    http://bj.ganji.com/diannao/
+    http://bj.ganji.com/xianzhilipin/
+    http://bj.ganji.com/fushixiaobaxuemao/
+    http://bj.ganji.com/meironghuazhuang/
+    http://bj.ganji.com/shuma/
+    http://bj.ganji.com/laonianyongpin/
+    http://bj.ganji.com/xuniwupin/
+    http://bj.ganji.com/qitawupin/
+    http://bj.ganji.com/ershoufree/
+    http://bj.ganji.com/wupinjiaohuan/
     """

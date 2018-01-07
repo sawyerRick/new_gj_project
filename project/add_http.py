@@ -9,7 +9,7 @@ def add_http(link):
         print('goodlink')
         return link
     else:
-        print("badlink")
+        print("badlink_but_fixed_it")
         print(link)
         link = 'http:' + link
         return link
